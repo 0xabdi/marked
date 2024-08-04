@@ -22,10 +22,10 @@ jobs:
         node-version: '16'  # Specify the Node.js version
 
     - name: Install dependencies
-      run: npm install || yarn install
+      run: npm install
 
     - name: OWASP Dependency Check
       uses: wimpress/dependency-check-action@v2
       with:
-        project: 'your-project-name'
+        project: 'marked'
         scan: '.'
