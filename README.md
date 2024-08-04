@@ -2,7 +2,7 @@
   <img width="60px" height="60px" src="https://marked.js.org/img/logo-black.svg" align="right" />
 </a>
 
-# Marked
+# Marked!
 
 [![npm](https://badgen.net/npm/v/marked)](https://www.npmjs.com/package/marked)
 [![gzip size](https://badgen.net/badgesize/gzip/https://cdn.jsdelivr.net/npm/marked/marked.min.js)](https://cdn.jsdelivr.net/npm/marked/marked.min.js)
