@@ -16,6 +16,8 @@ jobs:
           curl -sL "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" --output dependency-check.zip
           unzip dependency-check.zip
       - name: Run Dependency Check
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
         run: |
           ./dependency-check/bin/dependency-check.sh --out report.html --scan .
           rm -rf dependency-check*
