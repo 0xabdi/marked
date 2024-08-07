@@ -19,7 +19,7 @@ jobs:
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
         run: |
-          ./dependency-check/bin/dependency-check.sh --out report.html --scan .
+          ./dependency-check/bin/dependency-check.sh --out report.html --scan . --nvdApiKey $NVD_API_KEY
           rm -rf dependency-check*
 
       - name: Upload Artifacts
