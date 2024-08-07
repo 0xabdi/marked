@@ -1,31 +1,27 @@
-name: OWASP Dependency Check
-
+name: Dependency-Check
 on:
   push:
     branches:
       - master
   pull_request:
-    branches:
-      - master
-
+    types: [opened, synchronize, reopened]
 jobs:
   dependency-check:
+    name: Dependency-Check
     runs-on: ubuntu-latest
+    steps: 
+      - name: Download OWASP Dependency Check
+        run: |
+          VERSION=$(curl -s https://jeremylong.github.io/DependencyCheck/current.txt)
+          curl -sL "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" --output dependency-check.zip
+          unzip dependency-check.zip
+      - name: Run Dependency Check
+        run: |
+          ./dependency-check/bin/dependency-check.sh --out report.html --scan .
+          rm -rf dependency-check*
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'  # Specify the Node.js version
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: OWASP Dependency Check
-      uses: wimpress/dependency-check-action@v2
-      with:
-        project: 'marked'
-        scan: '.'
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: report.html
